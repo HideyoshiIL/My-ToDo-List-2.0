@@ -5,8 +5,13 @@ const filterBtn = document.querySelector(".filter");
 
 
 let tasks = [];
-let id = 0;
+
 let completed = false;
+
+const localSaved = localStorage.getItem("Tasks")
+tasks = localSaved ? JSON.parse(localSaved) : [];
+renderTasks(tasks)
+let id = tasks.length ? Math.max(...tasks.map(t => t.id)) : 0;
 
 imputForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -15,7 +20,7 @@ imputForm.addEventListener("submit", (e) => {
 
   addObjTask(tasks, text)
   renderTasks(tasks)
-
+  saveInLocalStorage(tasks)
 
   inputTask.value = "";
 })
@@ -29,6 +34,7 @@ function addObjTask(arrOftask, textOfTask) {
   arrOftask.push(newTask);
   return arrOftask;
 }
+saveInLocalStorage(tasks)
 
 function renderTasks(tasks) {
 
@@ -61,6 +67,7 @@ toDoList.addEventListener("click", (e) => {
       const dataId = Number(taskTarget.dataset.id)
       tasks = tasks.filter(item => item.id !== dataId);
       renderTasks(tasks)
+      saveInLocalStorage(tasks)
     }
   }
 
@@ -72,13 +79,20 @@ toDoList.addEventListener("click", (e) => {
 
       const task = tasks.find(item => item.id === dataId);
       task.completed = !task.completed
-    renderTasks(tasks)
+      renderTasks(tasks)
+      saveInLocalStorage(tasks)
     }
 
   }
 })
 
 filterBtn.addEventListener("click", () => {
-  tasks.sort((a,b) => a.completed - b.completed)
+  tasks.sort((a, b) => a.completed - b.completed)
   renderTasks(tasks)
+  saveInLocalStorage(tasks)
 })
+
+function saveInLocalStorage(tasks) {
+  const saveLocStor = JSON.stringify(tasks);
+  localStorage.setItem("Tasks", saveLocStor);
+}
