@@ -1,21 +1,22 @@
 const imputForm = document.querySelector(".imputForm");
 const inputTask = document.querySelector(".inputTask");
 const toDoList = document.querySelector(".toDoList");
+const filterBtn = document.querySelector(".filter");
 
-toDoList.style.border = "0px";
 
 let tasks = [];
 let id = 0;
+let completed = false;
 
 imputForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const text = inputTask.value.trim();
-  
+
   addObjTask(tasks, text)
   renderTasks(tasks)
 
-  console.log(tasks)
+
   inputTask.value = "";
 })
 
@@ -23,6 +24,7 @@ function addObjTask(arrOftask, textOfTask) {
   const newTask = {};
   newTask.id = ++id;
   newTask.text = textOfTask;
+  newTask.completed = completed;
 
   arrOftask.push(newTask);
   return arrOftask;
@@ -31,9 +33,9 @@ function addObjTask(arrOftask, textOfTask) {
 function renderTasks(tasks) {
 
   if (tasks.length === 0) {
-    toDoList.style.border = "0px";
+    toDoList.classList.remove("activeList");
   } else {
-    toDoList.style.border = "1px solid rgb(253, 225, 179)";
+    toDoList.classList.add("activeList");
   }
 
   toDoList.innerHTML = "";
@@ -41,9 +43,9 @@ function renderTasks(tasks) {
 
   tasks.forEach((item) => {
     taskHtml += `  
-      <div class="task" data-id ="${item.id}">
-        <input type="checkbox">
-        <div class="text">${item.text[0].toUpperCase() + item.text.substring(1)}</div>
+      <div class="task ${item.completed ? "completed" : ''}" data-id ="${item.id}">
+      <i class="fa fa-check-square-o checkBox" aria-hidden="true"></i>
+        <div class="text ${item.completed ? "textDecor" : ''}">${item.text[0].toUpperCase() + item.text.substring(1)}</div>
   <i class="fa fa-trash-o" aria-hidden="true"></i>
     </div>`
   })
@@ -52,6 +54,7 @@ function renderTasks(tasks) {
 }
 
 toDoList.addEventListener("click", (e) => {
+
   if (e.target.classList.contains("fa-trash-o")) {
     const taskTarget = e.target.closest(".task");
     if (taskTarget) {
@@ -60,5 +63,22 @@ toDoList.addEventListener("click", (e) => {
       renderTasks(tasks)
     }
   }
+
+  if (e.target.classList.contains("checkBox")) {
+
+    const taskTarget = e.target.closest(".task");
+    if (taskTarget) {
+      const dataId = Number(taskTarget.dataset.id);
+
+      const task = tasks.find(item => item.id === dataId);
+      task.completed = !task.completed
+    renderTasks(tasks)
+    }
+
+  }
 })
 
+filterBtn.addEventListener("click", () => {
+  tasks.sort((a,b) => a.completed - b.completed)
+  renderTasks(tasks)
+})

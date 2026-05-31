@@ -43,7 +43,14 @@ body {
 .inputButtom {
   border: 1px black solid;
   border-radius: 5px;
+  cursor: pointer;
+}
 
+.filter {
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px black solid;
+  cursor: pointer;
 }
 
 .toDoList {
@@ -53,9 +60,8 @@ body {
   flex-direction: column;
   align-items: center;
   margin: auto;
-  border-radius: 10px;
+
   font-size: 20px;
-  border: 1px solid rgb(253, 225, 179);
   background-color: rgba(83, 139, 134, 0.705);
 }
 
@@ -73,6 +79,7 @@ body {
   margin-right: 10px;
   margin-left: 10px;
   min-width: 0;
+
 }
 
 .fa-trash-o {
@@ -81,6 +88,29 @@ body {
 }
 
 .fa-trash-o:hover {
-   transform: scale(1.2);
-   color: brown;
+  transform: scale(1.2);
+  color: brown;
+}
+
+.activeList {
+  border: 2px solid rgb(253, 225, 179);
+  border-radius: 5px;
+}
+
+.fa-check-square-o {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.fa-check-square-o:hover {
+  transform: scale(1.2);
+  color: rgb(136, 235, 111);
+}
+
+.completed {
+  background-color: rgb(99, 99, 99);
+}
+
+.textDecor {
+  text-decoration: line-through;
 }
