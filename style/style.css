@@ -4,7 +4,8 @@
 }
 
 body {
-  background-color: rgb(45, 75, 72);
+  background-color: #111827;
+
 }
 
 .container {
@@ -22,14 +23,18 @@ body {
   align-items: center;
   height: 150px;
   width: 300px;
-  background-color: rgb(223, 218, 164);
-  border: 1px solid rgb(253, 225, 179);
+
   border-radius: 10px;
+  background: linear-gradient(135deg,
+      #111827 0%,
+      #1F2937 100%,
+      #374151 700%);
+
 }
 
 .nameToDo {
   font-family: "RoleModel";
-  color: rgb(45, 75, 72);
+  color: #F9FAFB;
   margin-bottom: 20px;
   font-size: 50px;
   font-weight: bold;
@@ -41,6 +46,8 @@ body {
 }
 
 .inputButtom {
+  color: #F9FAFB;
+  background-color: #326cca;
   border: 1px black solid;
   border-radius: 5px;
   cursor: pointer;
@@ -51,6 +58,8 @@ body {
   border-radius: 5px;
   border: 1px black solid;
   cursor: pointer;
+  color: #F9FAFB;
+  background-color: #3B82F6;
 }
 
 .toDoList {
@@ -60,9 +69,9 @@ body {
   flex-direction: column;
   align-items: center;
   margin: auto;
-
+  color: #F9FAFB;
   font-size: 20px;
-  background-color: rgba(83, 139, 134, 0.705);
+  background-color: #1F2937;
 }
 
 .task {
@@ -93,8 +102,12 @@ body {
 }
 
 .activeList {
-  border: 2px solid rgb(253, 225, 179);
+  font-weight: 400;
+  border: 1px solid #19212c;
   border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+ 
 }
 
 .fa-check-square-o {
@@ -104,11 +117,11 @@ body {
 
 .fa-check-square-o:hover {
   transform: scale(1.2);
-  color: rgb(136, 235, 111);
+  color: #3cee77;
 }
 
 .completed {
-  background-color: rgb(99, 99, 99);
+  background-color: #484952;
 }
 
 .textDecor {
